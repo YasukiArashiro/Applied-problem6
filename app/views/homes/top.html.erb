@@ -1,0 +1,37 @@
+<!---------- トップ画面 ---------->
+
+<body>
+<!-- ヘッダー部分 -->
+<%= render 'layouts/header' %>
+
+<div calss="mian">
+	<div class="container">
+		<div class="row">
+			<p id="notice" style="color: green;"> <!-- ログアウトのサクセスメッセージ -->
+				<%= notice %>
+			</p>
+			<div class="top-message col-lg-offset-3 col-lg-6">
+				<h1 class="#" style="margin-top: 80px;">welcome to <span class="glyphicon glyphicon-book strong" aria-hidden="true" style="font-weight: bold;">Bookers</span>　!!</h1>
+				<p>In <span class="glyphicon glyphicon-book" aria-hidden="true"><strong>Bookers</strong></span>,</p>
+				<p>you can share and exchange your opinions , inpressions , and emotions</p>
+				<p>about various books!</p>
+			</div>
+		</div>
+
+		<div class="row col-lg-offset-3 col-lg-6">
+			<%= link_to "Log in", new_user_session_path, {class: "btn btn-info btn-block", style: "color:#666; display: block;" } %>
+			<%= link_to "Sign up", new_user_registration_path, {class: "btn btn-success btn-block", style: "color:#666; display: block; margin-top: 0px;" } %>
+
+		</div>
+
+		<div class="row col-lg-offset-9 col-lg-3">
+			<p>CopyRight Infratop.inc</p>
+		</div>
+
+	</div>
+
+</div>
+
+
+
+</body>

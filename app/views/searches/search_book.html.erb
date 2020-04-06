@@ -1,0 +1,33 @@
+<div class="col-xs-9">
+			<h2>Search Books</h2>
+			<table class="table">
+				<thead>
+					<th colspan="1"></th> <th>Title</th> <th>Opinion</th>
+				</thead>
+				<tbody>
+					<% @books.each do |book| %>
+						<tr>
+							<td>
+							<%= link_to user_path(book.user) do %>
+							<%= attachment_image_tag book.user, :profile_image, :fill, 50, 50, format:'jpeg', fallback: "no_image.jpg", size:'50x50' %>
+                  			<% end %>
+							</td>
+							<td><%= link_to book.title,book_path(book.id) %></td>
+							<td><%= book.body %></td>
+
+							<% if book.favorite_user(current_user.id, book.id) %>
+								<td><%= link_to book.favo_count.to_i, favorite_delete_path(book), method: "delete", class: "glyphicon glyphicon-heart" %></td>
+							<% else %>
+								<td><%= link_to book.favo_count.to_i, book_favorites_path(book), method: "post", class: "glyphicon glyphicon-heart-empty" %></td>
+							<% end %>
+
+							<td>コメント数：<%= book.book_comments_count.to_i %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+</div>
+
+<div class="col-xs-9">
+<%= link_to ' Back ', books_path, class: "btn btn-success" %>
+</div>

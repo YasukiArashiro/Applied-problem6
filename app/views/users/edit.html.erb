@@ -1,0 +1,36 @@
+
+<body>
+
+	<%= render 'layouts/header' %>
+
+	<div class="container" style="margin-top: 50px;">
+		<div class="row">
+			<h2>User info</h2>
+
+			<% if @user.errors.any? %>
+				<h2 style="color: red;"><%= @user.errors.count %> errors prohibited this obj from being saved:</h2>
+				<% @user.errors.full_messages.each do |msg| %>
+					<li style="color: red;"><%= msg %></li>
+				<% end %>
+			<% end %>
+
+			<%= form_for(@user) do |f| %>
+				<div class="name">
+					<p><strong>Name </strong><%= f.text_field :name, class:"", id:"inputEmail", placeholder:"名前"%></p>
+				</div>
+				<div class="image">
+					<p><strong>Image</strong></p>
+					<%= f.attachment_field :profile_image, class: "user-edit-form" %>
+				</div>
+				<div class="Introduction">
+					<p><strong>Intoroduction</strong><%= f.text_area :introduction %></p>
+				</div>
+				<%= f.submit "Update User", class:"submit" %>
+			<% end %>
+		</div>
+	</div>
+
+	<%= render 'layouts/footer' %>
+
+
+</body>

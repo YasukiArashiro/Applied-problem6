@@ -1,0 +1,45 @@
+<body>
+
+<%= render 'layouts/header' %>
+
+<div class="container" style="margin-top: 70px;">
+	<div class="row">
+
+		<p id="notice" style="color: green;"> <!-- userのサクセスメッセージ -->
+			<%= notice %>
+		</p>
+
+		<%= render 'layouts/sidebar', user: @user, book: @book %>
+
+		<div class="col-xs-9">
+			<h2>Books</h2>
+			<table class="table">
+				<thead>
+					<th colspan="1"></th> <th>Title</th> <th>Opinion</th>
+				</thead>
+				<tbody>
+					<% @books.each do |book| %>
+						<tr>
+							<td>
+								<%= link_to user_path(@user) do %>
+								<%= attachment_image_tag @user, :profile_image, :fill, 50, 50, format:'jpeg', fallback: "no_image.jpg", size:'50x50' %>
+								<% end %>
+							</td>
+							<td><%= link_to book.title,book_path(book.id) %></td>
+							<td><%= book.body %></td>
+
+							<td>コメント数：<%= book.book_comments_count.to_i %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+
+</div>
+
+	<%= render 'layouts/footer' %>
+
+
+</body>

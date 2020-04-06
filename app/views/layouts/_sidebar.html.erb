@@ -1,0 +1,52 @@
+
+<div class="col-lg-3">
+			<div class="col">
+				<h2>User info</h2>
+				<%= attachment_image_tag user, :profile_image, :fill, 60, 60, format:'jpeg', class: "#", fallback: "no_image.jpg" %>
+				<table class="table" style="font-weight: bold;">
+					<tbody>
+						<tr>
+							<td>name</td>
+							<td><%= user.name %></td>
+						</tr>
+						<tr>
+							<td>introduction</td>
+							<td><%= user.introduction %></td>
+						</tr>
+						<tr>
+							<td>follows</td>
+							<td><%= link_to user.active_relationships.count, follows_user_relationships_path(user) %></td>
+						</tr>
+						<tr>
+							<td>followers</td>
+							<td><%= link_to user.passive_relationships.count, followers_user_relationships_path(user) %></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<% if current_user != user %>
+					<% if user.followed_by?(current_user) %>
+						<td><%= link_to 'フォロー中', user_relationships_path(user), method: "delete", class: "btn btn-primary btn-block" %></td>
+					<% else %>
+						<td><%= link_to ' フォロー ', user_relationships_path(user), method: "post", class: "btn btn-info btn-block" %></td>
+					<% end %>
+				<% end %>
+
+				<% if current_user == user %>
+				<%= link_to '', edit_user_path(current_user.id), {class: "btn btn-default btn-block glyphicon glyphicon-wrench"} %>
+				<% else %>
+				<%= link_to '', user_path(current_user.id), {class: "btn btn-default btn-block glyphicon glyphicon-wrench"} %>
+				<% end %>
+			</div>
+
+			<div class="col">
+				<h2>New book</h2>
+				<%= form_for(book) do |f| %>
+					<p><strong>Title</strong></p>
+					<%= f.text_field :title %>
+					<p><strong>Opinion</strong></p>
+					<%= f.text_area :body %>
+					<%= f.submit "Create Book", class: "btn btn-block btn-primary"%>
+				<% end %>
+			</div>
+		</div>

@@ -1,0 +1,35 @@
+<div class="col-xs-9">
+				<h2>Search Users</h2>
+				<table class="table">
+					<thead>
+						<th>image</th> <th>name</th><th colspan="1"></th>
+					</thead>
+
+					<tbody>
+					<% @users.each do |user| %>
+							<tr>
+								<td><%= attachment_image_tag user, :profile_image, :fill, 50, 50, format:'jpeg', fallback: "no_image.jpg", size:'50x50' %></td>
+								<td><%= user.name %></td>
+								<td>フォロー数： <%= user.active_relationships.count %></td>
+								<td>フォロワー数： <%= user.passive_relationships.count %></td>
+
+					<% if current_user != user %>
+						<% if user.followed_by?(current_user) %>
+							<td><%= link_to 'フォロー中', user_relationships_path(user), method: "delete", class: "btn btn-primary" %></td>
+						<% else %>
+							<td><%= link_to ' フォロー ', user_relationships_path(user), method: "post", class: "btn btn-info" %></td>
+						<% end %>
+					<% else %>
+						<td></td>
+					<% end %>
+					<td><%= link_to "Show", user_path(user) %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+
+<div class="col-xs-9">
+<%= link_to ' Back ', users_path, class: "btn btn-success" %>
+</div>
+
